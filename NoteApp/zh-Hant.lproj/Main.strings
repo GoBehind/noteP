@@ -1,0 +1,24 @@
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "5VD-LA-7NK"; */
+"5VD-LA-7NK.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "8pD-Gg-FYY"; */
+"8pD-Gg-FYY.text" = "標題";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "Ans-BI-XZv"; */
+"Ans-BI-XZv.normalTitle" = "Edit";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "F7v-pX-hRg"; */
+"F7v-pX-hRg.title" = "項目";
+
+/* Class = "UIBarButtonItem"; title = "Edit"; ObjectID = "d3G-u7-YP6"; */
+"d3G-u7-YP6.title" = "Edit";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "djk-TS-ER9"; */
+"djk-TS-ER9.text" = "標題";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "gYg-aJ-hmV"; */
+"gYg-aJ-hmV.text" = "細項";
+
+/* Class = "UINavigationItem"; title = "List"; ObjectID = "zzg-TB-V8x"; */
+"zzg-TB-V8x.title" = "清單";

@@ -13,7 +13,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var tableView: UITableView!
 
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topCosnstraint: NSLayoutConstraint!
     
     
     var data : [Note] = [] //model: 資料用Array，裡面只能放Note類型的物件
