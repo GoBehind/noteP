@@ -19,7 +19,7 @@
 		809A8C632448208100116809 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809A8C622448208100116809 /* Note.swift */; };
 		80A6742B244945480060524E /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A6742A244945480060524E /* NoteCell.swift */; };
 		80A6742D244954100060524E /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A6742C244954100060524E /* NoteViewController.swift */; };
-		80C837AD246E784100D1777F /* infoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C837AF246E784100D1777F /* infoPlist.strings */; };
+		80C837B7246E7CE400D1777F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C837B9246E7CE400D1777F /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,8 +40,8 @@
 		80A6742C244954100060524E /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		80C837A9246E74F900D1777F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		80C837AA246E74F900D1777F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		80C837AE246E784100D1777F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/infoPlist.strings; sourceTree = "<group>"; };
-		80C837B0246E785C00D1777F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/infoPlist.strings"; sourceTree = "<group>"; };
+		80C837B8246E7CE400D1777F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		80C837BA246E7CEC00D1777F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +85,7 @@
 				809A8C55244808A200116809 /* Assets.xcassets */,
 				809A8C57244808A200116809 /* LaunchScreen.storyboard */,
 				809A8C5A244808A200116809 /* Info.plist */,
-				80C837AF246E784100D1777F /* infoPlist.strings */,
+				80C837B9246E7CE400D1777F /* InfoPlist.strings */,
 				808B4A6C2457D48F007C69C1 /* CoreDataHelper.swift */,
 				808B4A692457CDC3007C69C1 /* NoteDataModel.xcdatamodeld */,
 			);
@@ -152,7 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				809A8C59244808A200116809 /* LaunchScreen.storyboard in Resources */,
-				80C837AD246E784100D1777F /* infoPlist.strings in Resources */,
+				80C837B7246E7CE400D1777F /* InfoPlist.strings in Resources */,
 				809A8C56244808A200116809 /* Assets.xcassets in Resources */,
 				809A8C54244808A200116809 /* Main.storyboard in Resources */,
 			);
@@ -198,13 +198,13 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		80C837AF246E784100D1777F /* infoPlist.strings */ = {
+		80C837B9246E7CE400D1777F /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				80C837AE246E784100D1777F /* en */,
-				80C837B0246E785C00D1777F /* zh-Hant */,
+				80C837B8246E7CE400D1777F /* en */,
+				80C837BA246E7CEC00D1777F /* zh-Hant */,
 			);
-			name = infoPlist.strings;
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
