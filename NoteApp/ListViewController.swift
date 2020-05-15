@@ -51,7 +51,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.navigationItem.title = "清單"
+        self.navigationItem.title = NSLocalizedString("list", comment: "")
         
         //iOS 11 以上的環境才運行
         if #available(iOS 11.0, *){
@@ -112,7 +112,13 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.accessoryType = .disclosureIndicator
         //cell.accessoryView = UISwitch()
         
-        
+        let now = Date()
+        let dateformatter = DateFormatter()
+        let calendar = Calendar(identifier: .republicOfChina)
+        dateformatter.calendar = calendar
+        dateformatter.dateStyle = .long
+        dateformatter.timeStyle = .short
+        cell.detailTextLabel?.text = dateformatter.string(from: now)
         
         return cell
     }
@@ -254,7 +260,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let moc = CoreDataHelper.shared.managedObjectContext()
         let note = Note(context: moc)
-        note.text = "New Note"
+        note.text = NSLocalizedString("new.note", comment: "")
         //self.data.append(note)
         
         //新增至第一筆

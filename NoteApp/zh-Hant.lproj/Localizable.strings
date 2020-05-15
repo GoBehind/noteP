@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  NoteApp
+
+  Created by 王冠之 on 2020/5/15.
+  Copyright © 2020 Wangkuanchih. All rights reserved.
+*/
+"new.note" = "新的筆記本...";
+"list" = "筆記清單";
