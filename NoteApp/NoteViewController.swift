@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 protocol NoteViewControllerDelegate: class {
     func didFinishUpdate(note: Note)
 }
-class NoteViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+class NoteViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, GADInterstitialDelegate{
+    
+    var adView: GADInterstitial!
     
     @IBOutlet weak var textView: UITextView!
     
@@ -71,7 +74,23 @@ class NoteViewController: UIViewController, UINavigationControllerDelegate, UIIm
             self.imageView.heightAnchor.constraint(equalTo: self.imageView.widthAnchor, multiplier: 0.75)
         if self.traitCollection.verticalSizeClass == .regular {
             self.imageHeighConstraint.isActive = true
-        } 
+        }
+        
+        self.adView = GADInterstitial(adUnitID: "ca-app-pub-3822241008799890/4656325185")
+        self.adView.delegate = self
+        self.adView.load(GADRequest())
+    }
+    
+    //插頁式
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        //使用者按Ｘ
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
+        self.dismiss(animated: true){
+            self.navigationController?.popViewController(animated: false)
+        }
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -107,9 +126,12 @@ class NoteViewController: UIViewController, UINavigationControllerDelegate, UIIm
         
         //通知到listVC
         self.delegate?.didFinishUpdate(note: self.currentNote)
-        //NotificationCenter.default.post(name: .noteUpdate, object: nil, userInfo:["note": self.currentNote ?? Note()] )
-        //回到前一頁
-        self.navigationController?.popViewController(animated: true)
-        
+
+        if self.adView.isReady{
+            self.adView.present(fromRootViewController: self)
+        }else{
+            //回到前一頁
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }

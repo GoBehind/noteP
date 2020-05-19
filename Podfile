@@ -16,6 +16,7 @@ pod 'Firebase/Crashlytics'
 
 # Recommended: Add the Firebase pod for Google Analytics
 pod 'Firebase/Analytics'
+pod 'Google-Mobile-Ads-SDK'
 
 
 end

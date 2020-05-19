@@ -8,26 +8,63 @@
 
 import UIKit
 import CoreData
+import StoreKit
+import MessageUI
+import FirebaseAnalytics
+import GoogleMobileAds
 
-class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NoteViewControllerDelegate {
+class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NoteViewControllerDelegate, MFMailComposeViewControllerDelegate, GADBannerViewDelegate {
+    
+    var bannerView: GADBannerView!
     
     @IBOutlet weak var tableView: UITableView!
-
     @IBOutlet weak var topCosnstraint: NSLayoutConstraint!
+    @IBAction func support(){
+        
+        if ( MFMailComposeViewController.canSendMail()){
+            let alert = UIAlertController(title: "", message: "We want to hear from you, Please send us your feedback by email in English", preferredStyle: .alert)
+            let email = UIAlertAction(title: "email", style: .default, handler: { (action) -> Void in
+                let mailController =  MFMailComposeViewController()
+                mailController.mailComposeDelegate = self
+                mailController.title = "I have question"
+                mailController.setSubject("I have question")
+                let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")
+                let product = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")
+                let messageBody = "<br/><br/><br/>Product:\(product!)(\(version!))"
+                mailController.setMessageBody(messageBody, isHTML: true)
+                mailController.setToRecipients(["support@yoursupportemail.com"])
+                self.present(mailController, animated: true, completion: nil)
+            })
+            alert.addAction(email)
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            //alert user can't send email
+        }
+    }
+    
+    //MARK: MFMailComposeViewControllerDelegate
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch (result){
+        case MFMailComposeResult.cancelled:
+            print("user cancelled")
+        case MFMailComposeResult.failed:
+            print("user failed")
+        case MFMailComposeResult.saved:
+            print("user saved email")
+        case MFMailComposeResult.sent:
+            print("email sent")
+        @unknown default:
+            print("Fail")
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
     
     
     var data : [Note] = [] //model: 資料用Array，裡面只能放Note類型的物件
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        
-//        for i in 0..<10{
-//            let note = Note()
-//            note.text = "Note \(i)"
-//            self.data.append(note)
-//        }
-        
-        //self.loadFromFile()
+
         loadFromCoreData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(ListViewController.noteUpdate(notification:)), name: .noteUpdate, object: nil)
@@ -59,6 +96,30 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         //利用系統提供的編輯按鈕
         self.navigationItem.leftBarButtonItem = self.editButtonItem
+        
+        //admob
+        self.bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        self.bannerView.translatesAutoresizingMaskIntoConstraints = false
+        self.bannerView.adUnitID = "ca-app-pub-3822241008799890/5932434756"
+        
+        self.bannerView.delegate = self
+        self.bannerView.rootViewController = self
+        self.bannerView.load(GADRequest())
+    
+    }
+    
+    //廣告進來時會呼叫，GADBannerViewDelegate
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        //self.tableView.tableHeaderView = self.bannerView
+        if self.bannerView.superview == nil{
+            self.topCosnstraint.isActive = false
+            self.view.addSubview(self.bannerView)
+            
+            self.bannerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+            self.bannerView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
+            self.bannerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+            self.bannerView.bottomAnchor.constraint(equalTo: self.tableView.topAnchor, constant: 0).isActive = true
+        }
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -68,6 +129,10 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        //SKStoreReviewController.requestReview()
+        
+        support()
         
 //        let alert = UIAlertController(title: "請登入", message: "輸入帳號密碼", preferredStyle: .alert)
 //        
@@ -255,8 +320,30 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+//    @IBAction func askForRating(){
+//
+//        let askController = UIAlertController(title: "Hello App User",
+//                                              message: "If you like this app,please rate in App Store. Thanks.",
+//                                              preferredStyle: .alert)
+//        let laterAction = UIAlertAction(title: "稍候再評",
+//                                        style: .default, handler: nil)
+//        askController.addAction(laterAction)
+//        let okAction = UIAlertAction(title: "我要評分", style: .default)
+//        { (action) -> Void in
+//            let appID = "12345"
+//            let appURL =
+//                URL(string: "https://itunes.apple.com/us/app/itunes-u/id\(appID)?action=write-review")!
+//            UIApplication.shared.open(appURL, options: [:],
+//                                      completionHandler: { (success) in
+//            })
+//        }
+//        askController.addAction(okAction)
+//        self.present(askController, animated: true, completion: nil)
+//    }
     
     @IBAction func addNote(_ sender: Any) {
+        
+        Analytics.logEvent("addNote", parameters: nil)
         
         let moc = CoreDataHelper.shared.managedObjectContext()
         let note = Note(context: moc)
